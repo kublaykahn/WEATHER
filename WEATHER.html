@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <title>Weather Forecast</title>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script>
+          var country = prompt("What country are you in?");
+          var state = prompt("Which state?");
+          var city = prompt("Which city?");
+      $.getJSON("http://cooper-union-weather-proxy.herokuapp.com/weather/" + country + state + "/" + city, function(response){
+            console.log(response);
+          //example of outputting the current temp
+          var currentTemp = response.current_observation.feelslike_f;
+          var obsTime = response.current_observation.observation_time;
+          $("#temperature").append(currentTemp + " degrees Farenheit<br />(" + obsTime + ")");
+          //create image tag
+            var imageTag = response.current_observation.icon_url;
+            $("#temperature").css("background-image", 'url(' + imageTag + ')');
+              $("#temperature").css("color", 'black');
+
+
+      });
+    </script>
+    <style>
+
+      div{
+        font: garamond;
+        font-size: 30px;
+        color: white;
+        display: block;
+        width: 40%;
+        margin: auto;
+        text-align: center;
+        margin-top: 25%;
+        background-color: blue;
+        background-image: imageTag;
+      }
+
+    </style>
+  </head>
+  <body>
+      <div id="temperature"></div>
+  </body>
+</html>
